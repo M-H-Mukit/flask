@@ -48,7 +48,7 @@ def generate_file():
 
         return {'output_file_name': GENERATED_FILE_NAME}, 200
     except:
-        return {'error': 'Something went wrong won server'}, 500
+        return {'error': 'Something went wrong on server'}, 500
 
 
 @app.route("/api/downloadfile")
@@ -56,7 +56,7 @@ def download_file():
     try:
         return send_file(GENERATED_FILE_NAME, as_attachment=True)
     except:
-        return {'error': 'Something went wrong won server'}, 500
+        return {'error': 'Something went wrong on server'}, 500
 
 
 @app.route("/api/getreport")
@@ -89,4 +89,4 @@ def get_report():
             'alphanumerics': total_alphanumerics,
         }
     except:
-        return {'error': 'Something went wrong won server'}, 500
+        return {'error': 'Something went wrong on server'}, 500
