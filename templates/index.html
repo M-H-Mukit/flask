@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<header>
+  <script
+    src="https://code.jquery.com/jquery-3.6.0.min.js"
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+    crossorigin="anonymous"
+  ></script>
+</header>
+<body>
+  <h1>Random Object Generator</h1>
+  <button id="generate">Generate</button>
+  <p>Link: <a href="/api/downloadfile" id="download-link">download</a></p>
+  <button id="report-btn">Report</button>
+  <p>Alphabetical string: <span id="alphabet-count"></span></p>
+  <p>Real numbers: <span id="real-number-count"></span></p>
+  <p>Integers: <span id="integer-count"></span></p>
+  <p>Alphanumerics: <span id="alphanumeric-count"></span></p>
+
+  <script>
+    $("#generate").click(function () {
+      $.ajax("/api/generatefile", {
+        type: "GET",
+        success: function (data, status, xhr) {
+          alert("Generated!");
+        },
+        error: function (jqXhr, textStatus, errorMessage) {
+          alert(errorMessage);
+        },
+      });
+    });
+
+    $("#report-btn").click(function () {
+      $.ajax("/api/getreport", {
+        type: "GET",
+        success: function (data, status, xhr) {
+          $("#alphabet-count").text(data.alphabetical_strings);
+          $("#real-number-count").text(data.real_numbers);
+          $("#integer-count").text(data.integers);
+          $("#alphanumeric-count").text(data.alphanumerics);
+        },
+        error: function (jqXhr, textStatus, errorMessage) {
+          alert(errorMessage);
+        },
+      });
+    });
+  </script>
+</body>
